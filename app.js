@@ -6,9 +6,20 @@ var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-// route
+// route 1
+// app.get('/', (req, res) => {
+//   res.render('home', { msg: 'Hello World!' });
+// })
+
+// OUR MOCK ARRAY OF PROJECTS
+let reviews = [
+  { title: "Great Review" },
+  { title: "Next Review" }
+]
+
+// INDEX
 app.get('/', (req, res) => {
-  res.render('home', { msg: 'Hello World!' });
+  res.render('reviews-index', { reviews: reviews });
 })
 
 app.listen(3000, () => {
