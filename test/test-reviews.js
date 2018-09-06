@@ -105,18 +105,18 @@ describe('Reviews', () => {
 //     });
 //   });
 
- // TEST DELETE
-  it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {
-    var review = new Review(sampleReview);
-    review.save((err, data)  => {
-     chai.request(server)
-      .delete(`/reviews/${data._id}?_method=DELETE`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.html
-        done();
-      });
-    });
-  });
+ // TEST DELETE - sucess
+//   it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {
+//     var review = new Review(sampleReview);
+//     review.save((err, data)  => {
+//      chai.request(server)
+//       .delete(`/reviews/${data._id}?_method=DELETE`)
+//       .end((err, res) => {
+//         res.should.have.status(200);
+//         res.should.be.html
+//         done();
+//       });
+//     });
+//   });
 
 });

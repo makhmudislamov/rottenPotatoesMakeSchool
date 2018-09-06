@@ -1,67 +1,11 @@
-{{!-- <form method="POST" action="/reviews">
-    <fieldset>
-        <legend>New Review</legend>
-        <!-- TITLE -->
-        <p>
-            <label for="review-title">Title</label><br>
-            <input id="review-title" type="text" name="title" />
-        </p>
-
-        <!-- MOVIE TITLE -->
-        <p>
-            <label for="movie-title">Movie Title</label><br>
-            <input id="movie-title" type="text" name="movieTitle" />
-        </p>
-
-        <!-- DESCRIPTION -->
-        <p>
-            <label for="description-text">Description</label><br>
-            <textarea id="description-text" name="description" rows="10" /></textarea>
-            <select type="Integer" name="rating"  id="drop-rating">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </p>
-    </fieldset>
-
-    <!-- BUTTON -->
-    <p>
-        <button type="submit">Save Review</button>
-    </p>
-
-</form> --}}
-
-<nav>
-    <a href="/">Back to Home</a>
-</nav>
-<form method="POST" action="/reviews">
-
-  {{> reviews-form}}
-
-  <!-- BUTTON -->
-  <p>
-    <button type="submit">Save Review</button>
-    <button type="reset">Cancel</button>
-  </p>
-
-</form>
-<style>
-    nav {
-        margin: 0 auto;
-        padding: 20px;
-        background-color:crimson;
-    }
-    a {
-color: black;
-text-decoration: none;
-    }
-
-    a:hover {
-        color: white;
-    }
-
-</style>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <form method="POST" action="/reviews">
+            {{> reviews-form}}
+            <!-- BUTTON -->
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Save Review</button>
+            </div>
+        </form>
+    </div>
+</div>
