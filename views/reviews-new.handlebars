@@ -35,8 +35,11 @@
 
 </form> --}}
 
+<nav>
+    <a href="/">Back to Home</a>
+</nav>
 <form method="POST" action="/reviews">
-<a href="/">Back to Home</a>
+
   {{> reviews-form}}
 
   <!-- BUTTON -->
@@ -46,3 +49,19 @@
   </p>
 
 </form>
+<style>
+    nav {
+        margin: 0 auto;
+        padding: 20px;
+        background-color:crimson;
+    }
+    a {
+color: black;
+text-decoration: none;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+</style>
