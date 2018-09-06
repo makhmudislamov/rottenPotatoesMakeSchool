@@ -27,31 +27,27 @@ mongoose.connect('mongodb://localhost/rotten-potatoes', {
 const Review = mongoose.model('Review', {
   title: String,
   description: String,
-  movieTitle: String
+  movieTitle: String,
+  rating: Number
 });
 
 // handlebar
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-// route 1
-// app.get('/', (req, res) => {
-//   res.render('home', { msg: 'Hello World!' });
-// })
-
-// OUR MOCK ARRAY OF PROJECTS
-// let reviews = [
-//   { title: "Great Review" },
-//   { title: "Awesome Review" }
-// ]
-
 // INDEX
-// app.get('/', (req, res) => {
-//   res.render('reviews-index', { reviews: reviews });
-// })
+app.get('/', (req, res) => {
+  Review.find()
+    .then(reviews => {
+      res.render('reviews-index', { reviews: reviews });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
 
-// updating root and using Review model from DB
-app.get('/reviews', (req, res) => {
+// Route for creating new review
+app.get('/reviews/new', (req, res) => {
   Review.find()
     .then(reviews => {
       res.render('reviews-new', { reviews: reviews });
@@ -59,6 +55,15 @@ app.get('/reviews', (req, res) => {
     .catch(err => {
       console.log(err);
     })
+})
+
+// Showing old reviews
+app.get('/reviews/:id', (req, res) => {
+  Review.findById(req.params.id).then((review) => {
+    res.render('reviews-show', { review: review })
+  }).catch((err) => {
+    console.log(err.message);
+  })
 })
 
 app.listen(3000, () => {
