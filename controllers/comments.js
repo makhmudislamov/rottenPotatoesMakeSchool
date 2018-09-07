@@ -12,20 +12,15 @@ app.post('/reviews/comments', (req, res) => {
     })
 });
 
-// SHOW
-// app.get('/reviews/:id', (req, res) => {
-//   // find review
-//   Review.findById(req.params.id).then(review => {
-//     // fetch its comments
-//     Comment.find({ reviewId: req.params.id }).then(comments => {
-//       // respond with the template with both values
-//       res.render('reviews-show', { review: review, comments: comments })
-//     })
-//   }).catch((err) => {
-//     // catch errors
-//     console.log(err.message)
-//   });
-// });
+// DELETE
+app.delete('/reviews/comments/:id', function (req, res) {
+    console.log("DELETE comment")
+        Comment.findByIdAndRemove(req.params.id).then((comment) => {
+            res.redirect(`/reviews/${comment.reviewId}`);
+        }).catch((err) => {
+    console.log(err.message);
+  })
+})
 
 
 }
