@@ -1,4 +1,5 @@
 const reviews = require('./controllers/reviews.js');
+const comments = require('./controllers/comments.js');
 const express = require('express');
 const methodOverride = require('method-override');
 const app = express();
@@ -15,6 +16,9 @@ app.set('view engine', 'handlebars');
 
 
 reviews(app);
+comments(app);
+
+
 
 // PORT
 app.listen(3000, () => {
