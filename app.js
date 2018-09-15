@@ -15,12 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-
+movies(app);
 reviews(app);
 comments(app);
-movies(app);
-
-
 
 // PORT
 app.listen(3000, () => {

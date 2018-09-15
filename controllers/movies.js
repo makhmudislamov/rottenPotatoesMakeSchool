@@ -1,9 +1,10 @@
 const MovieDb = require('moviedb-promise');
 const moviedb = new MovieDb('3b665f3bff49568f114e51e707884fa5');
+const Review = require('../models/review.js');
 
 module.exports = function(app) {
 
-    // INDEXm
+    // INDEX
     app.get('/', (req, res) => {
         moviedb.miscNowPlayingMovies().then(response => {
             res.render('movies-index', {
@@ -13,48 +14,28 @@ module.exports = function(app) {
     });
 
 
-    // SHOW ONE MOVIE 
-    // app.get('/movies/:id', (req, res) => { 
-    //     moviedb.movieInfo({ id: req.params.id }).then(movie => { 
-    //         res.render('movies-show', { 
-    //           movie: movie 
-    //         }); 
-    //       }).catch(console.error) 
-    //     });
+    // SHOW
+ app.get('/movies/:id', (req, res) => {
+  moviedb.movieInfo({ id: req.params.id }).then((movie) => {
+    Review.find({ movieId: req.params.id }).then((reviews) =>{
 
-    app.get('/movies/:id', (req, res) => {
-      moviedb.movieInfo({ id: req.params.id }).then(movie => {
-        if (movie.video) {
-          moviedb.movieVideos({
-            id: req.params.id
-          }).then(videos => {
-            movie.trailer_youtube_id = videos.results[0].key
-            renderTemplate(movie)
-          })
-        } else {
-          renderTemplate(movie)
-        }
-        function renderTemplate(movie) {
-          res.render('movies-show', {
-            movie: movie
-          });
-        }
+    if (movie.video) {
+      moviedb.movieVideos({ id: req.params.id }).then(videos => {
+        movie.trailer_youtube_id = videos.results[0].key
+        renderTemplate(movie, reviews);
+      })
+    } else {
+      renderTemplate(movie, reviews);
+    }
 
-      }).catch(console.error)
-    });
+    function renderTemplate(movie, reviews)  {
+      res.render('movies-show', { movie: movie, reviews:reviews });
+    }
+  })
+
+  }).catch(console.error)
+
+});
 
   
-
-    //  CHECK HOW TO BUILD ROUTE FOR OTHER METHODS such as following
-
-    // Popular movies
-    // app.get('./popular', (req, res) => {
-    //     moviedb.miscPopularMovies().then(response => {
-    //         res.render('movies-popular', {
-    //             movies: response.results
-    //         });
-    //     }).catch(console.error)
-    // });
-    // 
-
-    }
+}

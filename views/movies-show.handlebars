@@ -1,3 +1,8 @@
+{{!-- New Review Button --}}
+<div class="text-right">
+    <a href="/movies/{{movie.id}}/reviews/new" class="btn btn-primary">Write Review</a>
+</div>
+{{!-- Movie Info section --}}
 <div class="row">
     <div class="col-sm-4">
         <img class="img-responsive" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" />
@@ -5,9 +10,15 @@
     <div class="col-sm-8">
         <h1>{{movie.title}}</h1>
         <p class="lead">{{movie.overview}}</p>
-    </div>
-    {{!-- YouTube LInk--}}
-    <div class="embed-responsive embed-responsive-21by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer_youtube_id}}?rel=0"></iframe>
+        {{!-- YouTube LInk--}}
+        <div class="embed-responsive embed-responsive-21by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer_youtube_id}}?rel=0" height="500"
+                , width="500"></iframe>
+        </div>
     </div>
 </div>
+
+<h3>Reviews</h3>
+{{#each reviews}}
+    {{> review}}
+{{/each}}
