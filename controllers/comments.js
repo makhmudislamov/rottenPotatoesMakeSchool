@@ -4,19 +4,23 @@ module.exports = function (app) {
 
 
 // CREATE Comment
-app.post('/reviews/comments', (req, res) => {
+app.post('/movies/:movieId/reviews/:id/comments', (req, res) => {
     Comment.create(req.body).then(comment => {
-        res.redirect(`/reviews/${comment.reviewId}`)
+        // res.redirect(`/movies/:movieId/reviews/${comment.reviewId}`)
+        // using AJAX
+        res.status(200).send({ comment: comment });
+
     }).catch((err) => {
-        console.log(err.message)
+        // console.log(err.message)
+        res.status(400).send({ err: err })
     })
 });
 
 // DELETE
-app.delete('/reviews/comments/:id', function (req, res) {
+app.delete('/movies/:movieId/reviews/:id/comments/:id', (req, res) => {
     console.log("DELETE comment")
         Comment.findByIdAndRemove(req.params.id).then((comment) => {
-            res.redirect(`/reviews/${comment.reviewId}`);
+            res.redirect(`/movies/:movieId/reviews/${comment.reviewId}`);
         }).catch((err) => {
     console.log(err.message);
   })

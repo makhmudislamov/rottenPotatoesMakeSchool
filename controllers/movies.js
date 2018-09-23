@@ -15,27 +15,33 @@ module.exports = function(app) {
 
 
     // SHOW
- app.get('/movies/:id', (req, res) => {
-  moviedb.movieInfo({ id: req.params.id }).then((movie) => {
-    Review.find({ movieId: req.params.id }).then((reviews) =>{
+  app.get('/movies/:id', (req, res) => {
+    console.log(req.params.id)
+    moviedb.movieInfo({ id: req.params.id }).then((movie) => {
 
-    if (movie.video) {
-      moviedb.movieVideos({ id: req.params.id }).then(videos => {
-        movie.trailer_youtube_id = videos.results[0].key
-        renderTemplate(movie, reviews);
+      Review.find({ movieId: req.params.id }).then((reviews) =>{
+        console.log(reviews)
+        if (movie.video) {
+          moviedb.movieVideos({ id: req.params.id }).then(videos => {
+            movie.trailer_youtube_id = videos.results[0].key
+            renderTemplate(movie, reviews);
+          })
+        } else {
+          renderTemplate(movie, reviews);
+        }
+
+        function renderTemplate(movie, reviews)  {
+          res.render('movies-show', { movie: movie, reviews:reviews });
+        }
+      }).catch(err => {
+        console.log(err);
       })
-    } else {
-      renderTemplate(movie, reviews);
-    }
 
-    function renderTemplate(movie, reviews)  {
-      res.render('movies-show', { movie: movie, reviews:reviews });
-    }
-  })
+    }).catch(err => {
+      console.log(err);
+    })
 
-  }).catch(console.error)
-
-});
+  });
 
   
 }
