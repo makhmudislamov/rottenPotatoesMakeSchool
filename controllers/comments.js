@@ -20,9 +20,11 @@ app.post('/movies/:movieId/reviews/:id/comments', (req, res) => {
 app.delete('/movies/:movieId/reviews/:id/comments/:id', (req, res) => {
     console.log("DELETE comment")
         Comment.findByIdAndRemove(req.params.id).then((comment) => {
-            res.redirect(`/movies/:movieId/reviews/${comment.reviewId}`);
+            // res.redirect(`/movies/:movieId/reviews/${comment.reviewId}`);
+            res.status(200).send(comment)
         }).catch((err) => {
-    console.log(err.message);
+    // console.log(err.message);
+    res.status(200).send(err);
   })
 })
 
