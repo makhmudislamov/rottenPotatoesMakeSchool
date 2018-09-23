@@ -27,7 +27,7 @@ window.onload = function () {
                             <h4 class="card-title">${response.data.comment.title}</h4>
                     <p class = "card-text" >${response.data.comment.content}</p>
                     <!-- Delete link -->
-                    <button class="btn btn-link delete-comment" data-comment-id="${response.data.comment._id}">Delete</button>
+                    <button class="btn btn-link delete-comment" id="deleteComment" data-comment-id="${response.data.comment._id}">Delete</button>
                 </div>
             </div>
             `
@@ -43,8 +43,8 @@ window.onload = function () {
 
      document.querySelector('.delete-comment').addEventListener('click', (e) => {
         console.log("click!")
-        // let commentId = deleteComment.getElementsByTagName("button")[0].getAttribute('data-comment-id')
-        let commentId = $(e.target).attr('data-comment-id');
+        //  let commentId = this.getAttribute('data-comment-id')
+         let commentId = $(e.target).attr('data-comment-id');
         // check the route
          axios.delete(`/movies/:movieId/reviews/:id/comments/${commentId}`)
 
