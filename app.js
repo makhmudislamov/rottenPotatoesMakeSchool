@@ -1,6 +1,7 @@
 const reviews = require('./controllers/reviews.js');
 const comments = require('./controllers/comments.js');
 const movies = require('./controllers/movies.js');
+const admin = require('./controllers/admin.js');
 const express = require('express');
 const methodOverride = require('method-override');
 const app = express();
@@ -22,7 +23,7 @@ mongoose.connect('mongodb://localhost/rotten-potatoes');
 movies(app);
 reviews(app);
 comments(app);
-// scripts(app);
+admin(app);
 
 // PORT
 app.listen(3000, () => {

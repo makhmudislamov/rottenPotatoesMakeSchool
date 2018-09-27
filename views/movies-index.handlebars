@@ -7,14 +7,18 @@
 </head>
 <body>
     <h1>Now Playing</h1>
-    <div class="row">
-        {{#each movies}}
-        <div class="col-sm-4">
-            <a href="/movies/{{this.id}}">
-                <img src='http://image.tmdb.org/t/p/w185{{this.poster_path}}' />
-            </a>
-            <p>{{this.title}}<p>
-        </div>
+    <div class="container">
+        <div class="row">
+            {{#each movies}}
+            <div class="col-sm">
+                <a href="/movies/{{this.id}}">
+                    <img src='http://image.tmdb.org/t/p/w185{{this.poster_path}}' />
+                    <p>{{this.title}}</p>
+                </a>
+            </div>
+            <div>
+    </div>
+   
         {{/each}}
 </body>
 </html>
@@ -22,5 +26,26 @@
     <style>
         h1 {
             text-align: center;
+        }
+
+        .container > div {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            
+            height: 100%;
+            width: 100%;
+        }
+        .row > div {
+            display: flex;
+            flex: 1;
+            margin: 10px;
+            justify-content: space-around;
+            align-items: center;
+            
+            height: 100%;
+            width: 100%;
         }
     </style>
