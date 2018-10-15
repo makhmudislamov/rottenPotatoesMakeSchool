@@ -1,0 +1,10 @@
+Front End:
+1. Fix how the movies are shown on index
+2. Fix how each movie is shown /movies/:id - description, trailer and reviews
+3. Better bootstrap?
+
+Back End:
+1. Trailers are not working
+2. Cannot delete comment right after posting
+3. Couldn't upload to heroku
+
